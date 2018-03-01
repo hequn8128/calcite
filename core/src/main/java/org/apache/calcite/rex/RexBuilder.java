@@ -1484,6 +1484,12 @@ public class RexBuilder {
       }
       return new NlsString((String) o, type.getCharset().name(),
           type.getCollation());
+    case BINARY:
+    case VARBINARY:
+      if (o instanceof ByteString) {
+        return o;
+      }
+      return new ByteString((byte[])o);
     case TIME:
       if (o instanceof TimeString) {
         return o;
